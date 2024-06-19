@@ -6,7 +6,6 @@ import Layout from "./components/user/UserLayout.jsx";
 import Products from "./components/products/Products.jsx";
 import AdminLayout from "./components/admin/AdminLayout.jsx";
 import AdminLogin from "./components/admin/AdminLogin.jsx";
-import About from "./components/user/About.jsx";
 import UserLogin from "./components/user/UserLogin.jsx";
 import UserRegister from "./components/user/UserRegister.jsx";
 import AdminPanel from "./components/admin/AdminPanel.jsx";
@@ -27,10 +26,6 @@ const router = createBrowserRouter([
       {
         path: "/product/:_id",
         element: <ProductDetail />,
-      },
-      {
-        path: "/about-us",
-        element: <About />
       },
       {
         path: "/users/register",

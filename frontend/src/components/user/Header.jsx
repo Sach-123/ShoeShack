@@ -28,7 +28,10 @@ const Header = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (!event.target.closest(".profile-icon") && !event.target.closest(".dropdown-menu")) {
+      if (
+        !event.target.closest(".profile-icon") &&
+        !event.target.closest(".dropdown-menu")
+      ) {
         setShowDropdown(false);
       }
     };
@@ -48,31 +51,60 @@ const Header = () => {
       </NavLink>
 
       <div className="nav-container flex items-center">
-        <NavLink to="/" className={({isActive}) =>`mx-5 ${isActive? "text-red-500 font-semibold":""}`}>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            `mx-5 ${isActive ? "text-red-500 font-semibold" : ""}`
+          }
+        >
           Products
-        </NavLink>
-        <NavLink to="/about-us" className={({isActive}) =>`mx-5 ${isActive? "text-red-500 font-semibold":""}`}>
-          About us
         </NavLink>
         {isLoggedIn ? (
           <>
-            <NavLink to="/users/cart" 
-            className={({isActive}) =>`mx-5 flex items-center ${isActive? "text-red-500 font-semibold":""}`}>
+            <NavLink
+              to="/users/cart"
+              className={({ isActive }) =>
+                `mx-5 flex items-center ${
+                  isActive ? "text-red-500 font-semibold" : ""
+                }`
+              }
+            >
               <img className="w-4 h-4 mr-1" src={cart} alt="Cart" />
               <span>Cart</span>
             </NavLink>
             <div className="relative mx-5">
-              <div className="profile-icon hover:scale-105 duration-150" onClick={toggleDropdown}>
-                <img className="w-6 h-6 inline" src={profileIcon} alt="Profile" />
-                <img className="w-6 h-6 inline ml-1" src={`${showDropdown ? close : menu}`} alt="Toggle" />
+              <div
+                className="profile-icon hover:scale-105 duration-150"
+                onClick={toggleDropdown}
+              >
+                <img
+                  className="w-6 h-6 inline"
+                  src={profileIcon}
+                  alt="Profile"
+                />
+                <img
+                  className="w-6 h-6 inline ml-1"
+                  src={`${showDropdown ? close : menu}`}
+                  alt="Toggle"
+                />
               </div>
               {showDropdown && (
                 <div className="flex flex-col dropdown-menu absolute w-[100px] top-4 bg-white border border-gray-300 rounded shadow-md mt-4 py-2 text-center">
-                  <p className="text-center px-2 pb-2">User: <strong>{username}</strong></p>
-                  <NavLink to="/users/orders" className="block px-2 py-2 text-gray-800 hover:bg-gray-200"
-                  
-                  >All Orders</NavLink>
-                  <button onClick={handleLogout} className="block px-2 py-2 text-red-500 hover:bg-red-100">Logout</button>
+                  <p className="text-center px-2 pb-2">
+                    User: <strong>{username}</strong>
+                  </p>
+                  <NavLink
+                    to="/users/orders"
+                    className="block px-2 py-2 text-gray-800 hover:bg-gray-200"
+                  >
+                    All Orders
+                  </NavLink>
+                  <button
+                    onClick={handleLogout}
+                    className="block px-2 py-2 text-red-500 hover:bg-red-100"
+                  >
+                    Logout
+                  </button>
                 </div>
               )}
             </div>
@@ -85,7 +117,12 @@ const Header = () => {
             <NavLink to="/users/register" className="mx-5">
               Sign up
             </NavLink>
-            <NavLink to="/admin/login" className="ml-5 bg-green-500 p-2 rounded">Admin</NavLink>
+            <NavLink
+              to="/admin/login"
+              className="ml-5 bg-green-500 p-2 rounded"
+            >
+              Admin
+            </NavLink>
           </>
         )}
       </div>
