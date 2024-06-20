@@ -10,7 +10,7 @@ const registerUser = asyncHandler(async (req, res) => {
   // create new user
   try {
     const { username, email, password } = req.body;
-  
+
     if (
       [username, email, password].some(
         (field) => field == null || field?.trim() == ""
@@ -18,27 +18,27 @@ const registerUser = asyncHandler(async (req, res) => {
     ) {
       throw new ApiError(400, "All fields are required");
     }
-  
+
     const existedUser = await User.findOne({
       $or: [{ username }, { email }],
     });
-  
+
     if (existedUser) {
       throw new ApiError(404, "User already existed");
     }
-  
+
     const user = await User.create({
       username,
       email,
       password,
     });
     const createdUser = await User.findById(user._id).select("-password");
-  
+
     return res
       .status(200)
       .json(new ApiResponse(200, "User created Successfully", createdUser));
   } catch (error) {
-    res.status(error.statusCode).json(error.message)
+    res.status(error.statusCode).json(error.message);
   }
 });
 
@@ -51,46 +51,56 @@ const loginUser = asyncHandler(async (req, res) => {
   // store in cookie and send res
   try {
     const { email, password } = req.body;
-  
-    if ([email, password].some((field) => field == null || field?.trim() == "")) {
+
+    if (
+      [email, password].some((field) => field == null || field?.trim() == "")
+    ) {
       throw new ApiError(400, "All fields are required");
     }
-  
+
     const user = await User.findOne({ email });
-  
+
     if (!user) {
       throw new ApiError(400, "User is not registered");
     }
-  
+
     const isPassWordValid = await user.isPassWordCorrect(password);
-  
+
     if (!isPassWordValid) {
       throw new ApiError(400, "Password is incorrect");
     }
-  
+
     const userAccessToken = await user.generateAccessToken();
-  
+
     const loggedInUser = await User.findById(user._id).select("-password");
 
     const oneHourFromNow = new Date(Date.now() + 60 * 60 * 1000);
-  
+
     const options = {
       httpOnly: true,
       secure: true,
-      expires: oneHourFromNow
+      sameSite: "None",
+      expires: oneHourFromNow,
     };
     return res
       .status(200)
       .cookie("userAccessToken", userAccessToken, options)
       .json(new ApiResponse(200, "login successful", loggedInUser));
   } catch (error) {
-    res.status(error.statusCode).json(error.message)
+    res.status(error.statusCode).json(error.message);
   }
 });
 
 const isLoggedIn = asyncHandler(async (req, res) => {
-    res.status(200).json(new ApiResponse(200, "User is logged in", {isloggedIn:true, user:req.user}));
-})
+  res
+    .status(200)
+    .json(
+      new ApiResponse(200, "User is logged in", {
+        isloggedIn: true,
+        user: req.user,
+      })
+    );
+});
 
 const logoutUser = asyncHandler(async (req, res) => {
   // clear cookies

@@ -22,7 +22,7 @@ const adminLogin = asyncHandler(async (req, res) => {
     ) {
       throw new ApiError(400, "Enter all credentials");
     }
-  
+
     if (
       !(
         username == process.env.ADMIN_USERNAME &&
@@ -31,22 +31,23 @@ const adminLogin = asyncHandler(async (req, res) => {
     ) {
       throw new ApiError(400, "Invalid admin credentials");
     }
-  
-    const adminAccessToken =await generateAdminToken({ username, password });
+
+    const adminAccessToken = await generateAdminToken({ username, password });
 
     const oneHourFromNow = new Date(Date.now() + 60 * 60 * 1000);
 
     const options = {
       httpOnly: true,
       secure: true,
-      expires: oneHourFromNow
-    }
+      sameSite: "None",
+      expires: oneHourFromNow,
+    };
     return res
       .status(200)
       .cookie("adminAccessToken", adminAccessToken, options)
-      .json(new ApiResponse(200, "admin successfully logged in",{}));
+      .json(new ApiResponse(200, "admin successfully logged in", {}));
   } catch (error) {
-    res.status(error.statusCode).json(error.message)
+    res.status(error.statusCode).json(error.message);
   }
 });
 
