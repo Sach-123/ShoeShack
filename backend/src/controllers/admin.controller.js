@@ -41,7 +41,6 @@ const adminLogin = asyncHandler(async (req, res) => {
       secure: true,
       sameSite: "None",
       expires: oneHourFromNow,
-      domain: '.shoe-shack-frontend.vercel.app',
     };
     return res
       .status(200)

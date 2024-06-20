@@ -78,7 +78,6 @@ const loginUser = asyncHandler(async (req, res) => {
 
     const options = {
       httpOnly: true,
-      domain: ".shoe-shack-frontend.vercel.app",
       secure: true,
       sameSite: "None",
       expires: oneHourFromNow,
