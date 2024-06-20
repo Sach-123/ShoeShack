@@ -3,12 +3,11 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/users.model.js";
 
-
 const options = {
   httpOnly: true,
   secure: true,
   sameSite: "None",
-  maxAge: 60 * 60 * 1000
+  maxAge: 60 * 60 * 1000,
 };
 
 const registerUser = asyncHandler(async (req, res) => {

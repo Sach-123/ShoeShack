@@ -21,7 +21,16 @@ const Products = () => {
 
   const fetchProducts = (page) => {
     axios
-      .post(`https://shoe-shack-backend.vercel.app/api/v1/products/allProducts?page=${page}&limit=${limit}`, filter)
+      .post(
+        `https://shoe-shack-backend.vercel.app/api/v1/products/allProducts?page=${page}&limit=${limit}`,
+        filter,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         setProducts(response.data.data);
       })
@@ -42,7 +51,7 @@ const Products = () => {
     setFilter((prevFilter) => {
       const isCategoryUnselected = prevFilter.category === category;
       if (isCategoryUnselected) {
-        const { category, ...rest } = prevFilter; 
+        const { category, ...rest } = prevFilter;
         return rest;
       } else {
         return {
@@ -52,14 +61,13 @@ const Products = () => {
       }
     });
     setCurrentPage(1);
-  
   };
 
   const toggleName = (name) => {
     setFilter((prevFilter) => {
       const isNameUnselected = prevFilter.name === name;
       if (isNameUnselected) {
-        const { name, ...rest } = prevFilter; 
+        const { name, ...rest } = prevFilter;
         return rest;
       } else {
         return {
@@ -69,7 +77,6 @@ const Products = () => {
       }
     });
     setCurrentPage(1);
-
   };
 
   const handlePriceChange = (event) => {
@@ -87,8 +94,7 @@ const Products = () => {
         price: { $gte: low, $lte: high },
       }));
     }
-    setCurrentPage(1)
-
+    setCurrentPage(1);
   };
 
   const clearFilter = () => {

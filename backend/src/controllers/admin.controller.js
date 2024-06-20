@@ -7,7 +7,7 @@ const options = {
   httpOnly: true,
   secure: true,
   sameSite: "None",
-  maxAge: 60 * 60 * 1000
+  maxAge: 60 * 60 * 1000,
 };
 
 const generateAdminToken = async function ({ username, password }) {
