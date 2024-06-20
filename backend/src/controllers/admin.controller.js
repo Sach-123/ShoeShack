@@ -34,13 +34,13 @@ const adminLogin = asyncHandler(async (req, res) => {
 
     const adminAccessToken = await generateAdminToken({ username, password });
 
-    const oneHourFromNow = new Date(Date.now() + 60 * 60 * 1000);
+    // const oneHourFromNow = new Date(Date.now() + 60 * 60 * 1000);
 
     const options = {
       httpOnly: true,
       secure: true,
       sameSite: "None",
-      expires: oneHourFromNow,
+      maxAge: 60 * 60 * 1000
     };
     return res
       .status(200)

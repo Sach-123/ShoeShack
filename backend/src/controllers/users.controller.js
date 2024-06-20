@@ -74,13 +74,13 @@ const loginUser = asyncHandler(async (req, res) => {
 
     const loggedInUser = await User.findById(user._id).select("-password");
 
-    const oneHourFromNow = new Date(Date.now() + 60 * 60 * 1000);
+    // const oneHourFromNow = new Date(Date.now() + 60 * 60 * 1000);
 
     const options = {
       httpOnly: true,
       secure: true,
       sameSite: "None",
-      expires: oneHourFromNow,
+      maxAge: 60 * 60 * 1000,
     };
     return res
       .status(200)
