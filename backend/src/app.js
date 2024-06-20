@@ -15,9 +15,9 @@ app.use(cookieParser());
 
 //test route
 
-app.get('/', (req, res) => {
-  res.send('Working...')
-})
+app.get("/", (req, res) => {
+  res.send("Working...");
+});
 
 // user router
 import userRouter from "./routes/users.routes.js";
