@@ -23,7 +23,12 @@ const AllOrder = () => {
 
   const fetchOrders = () => {
     axios
-      .post("https://shoe-shack-backend.vercel.app/api/v1/users/all-order")
+      .post("https://shoe-shack-backend.vercel.app/api/v1/users/all-order",{},{
+        withCredentials: true, 
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
       .then((response) => {
         setOrders(response.data.data);
       })

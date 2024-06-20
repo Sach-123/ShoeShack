@@ -13,7 +13,12 @@ const AdminPanel = () => {
 
   useEffect(() => {
     axios
-      .post("https://shoe-shack-backend.vercel.app/api/v1/admin/verify-token", {})
+      .post("https://shoe-shack-backend.vercel.app/api/v1/admin/verify-token", {},{
+        withCredentials: true, 
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
       .then((response) => {
         if (response.status !== 200) {
           throw new Error("unauthorized");

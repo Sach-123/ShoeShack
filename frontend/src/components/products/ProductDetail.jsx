@@ -27,7 +27,10 @@ const ProductDetail = () => {
 
   const fetchReview = (_id) => {
     axios
-      .post("https://shoe-shack-backend.vercel.app/api/v1/products/product/get-review", { _id })
+      .post(
+        "https://shoe-shack-backend.vercel.app/api/v1/products/product/get-review",
+        { _id }
+      )
       .then((response) => {
         setReviews(response.data);
       })
@@ -42,7 +45,9 @@ const ProductDetail = () => {
 
   const fetchProduct = (id) => {
     axios
-      .get(`https://shoe-shack-backend.vercel.app/api/v1/products/product/${id}`)
+      .get(
+        `https://shoe-shack-backend.vercel.app/api/v1/products/product/${id}`
+      )
       .then((response) => {
         setProduct(response.data.data);
       })
@@ -57,21 +62,39 @@ const ProductDetail = () => {
 
   const checkIfInCart = (id) => {
     axios
-      .post("https://shoe-shack-backend.vercel.app/api/v1/users/check-cart", { productId: id })
+      .post(
+        "https://shoe-shack-backend.vercel.app/api/v1/users/check-cart",
+        { productId: id },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         setIsInCart(response.data.isInCart);
-        setPrevQuantity(response.data.quantity)
+        setPrevQuantity(response.data.quantity);
       })
       .catch((error) => {});
   };
 
   const submitReview = () => {
     axios
-      .post("https://shoe-shack-backend.vercel.app/api/v1/users/product/add-review", {
-        _id: product._id,
-        rating,
-        reviewText,
-      })
+      .post(
+        "https://shoe-shack-backend.vercel.app/api/v1/users/product/add-review",
+        {
+          _id: product._id,
+          rating,
+          reviewText,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         fetchReview(_id);
       })
@@ -84,7 +107,10 @@ const ProductDetail = () => {
     // Add the product to the cart logic here
     if (isLoggedIn) {
       axios
-        .patch("https://shoe-shack-backend.vercel.app/api/v1/users/add-to-cart", { _id: product._id, quantity })
+        .patch(
+          "https://shoe-shack-backend.vercel.app/api/v1/users/add-to-cart",
+          { _id: product._id, quantity }
+        )
         .then((response) => {
           setIsInCart(true);
           setPrevQuantity(quantity);
@@ -101,7 +127,10 @@ const ProductDetail = () => {
 
   const handleRemoveFromCart = () => {
     axios
-      .patch("https://shoe-shack-backend.vercel.app/api/v1/users/remove-from-cart", { _id })
+      .patch(
+        "https://shoe-shack-backend.vercel.app/api/v1/users/remove-from-cart",
+        { _id }
+      )
       .then((response) => {
         setIsInCart(false);
       })
@@ -111,15 +140,17 @@ const ProductDetail = () => {
   };
 
   const handleUpdateQuanity = () => {
-
     axios
-      .patch("https://shoe-shack-backend.vercel.app/api/v1/users/update-quantity",{_id, quantity})
+      .patch(
+        "https://shoe-shack-backend.vercel.app/api/v1/users/update-quantity",
+        { _id, quantity }
+      )
       .then((response) => {
-        console.log(response)
-        setPrevQuantity(quantity)
+        console.log(response);
+        setPrevQuantity(quantity);
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
       });
   };
 

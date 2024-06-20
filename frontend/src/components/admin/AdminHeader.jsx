@@ -8,7 +8,16 @@ const AdminHeader = () => {
 
   const handleLogout = () => {
     axios
-      .post("https://shoe-shack-backend.vercel.app/api/v1/admin/logout")
+      .post(
+        "https://shoe-shack-backend.vercel.app/api/v1/admin/logout",
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         console.log(response);
         navigate("/admin/login");
