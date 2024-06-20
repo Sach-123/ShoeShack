@@ -17,7 +17,7 @@ const ProductList = () => {
 
   const fetchProducts = (page) => {
     axios
-      .post(`/api/v1/products/allProducts?page=${page}&limit=${limit}`, filter)
+      .post(`https://shoe-shack-backend.vercel.app/api/v1/products/allProducts?page=${page}&limit=${limit}`, filter)
       .then((response) => {
         setProducts(response.data.data);
       })
@@ -30,7 +30,7 @@ const ProductList = () => {
     const a = confirm("Are you sure ?")
     if(a){
       axios
-        .post("/api/v1/admin/delete-product", { _id: id })
+        .post("https://shoe-shack-backend.vercel.app/api/v1/admin/delete-product", { _id: id })
         .then(() => {
           setProducts((prevProducts) => ({
             ...prevProducts,

@@ -10,7 +10,7 @@ const Register = () => {
 
   const onSubmit = (data) => {
     axios
-      .post("/api/v1/users/register", data)
+      .post("https://shoe-shack-backend.vercel.app/api/v1/users/register", data)
       .then((response) => {
         console.log(response);
         setMessage(response.data.message);

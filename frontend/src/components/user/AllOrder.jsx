@@ -23,7 +23,7 @@ const AllOrder = () => {
 
   const fetchOrders = () => {
     axios
-      .post("/api/v1/users/all-order")
+      .post("https://shoe-shack-backend.vercel.app/api/v1/users/all-order")
       .then((response) => {
         setOrders(response.data.data);
       })

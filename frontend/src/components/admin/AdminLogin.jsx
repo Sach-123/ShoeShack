@@ -9,7 +9,7 @@ const Login = () => {
 
   useEffect(() => {
     axios
-      .post("/api/v1/admin/verify-token", {})
+      .post("https://shoe-shack-backend.vercel.app/api/v1/admin/verify-token", {})
       .then((response) => {
         if (response.status === 200) {
           setMessage("...Restoring admin session")
@@ -23,7 +23,7 @@ const Login = () => {
 
   const onSubmit = (data) => {
     axios
-      .post("/api/v1/admin/login", data)
+      .post("https://shoe-shack-backend.vercel.app/api/v1/admin/login", data)
       .then((response) => {
         setMessage(response.data.message);
         setTimeout(() => navigate("/admin/panel"), 1000);

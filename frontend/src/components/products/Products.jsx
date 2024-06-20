@@ -21,7 +21,7 @@ const Products = () => {
 
   const fetchProducts = (page) => {
     axios
-      .post(`/api/v1/products/allProducts?page=${page}&limit=${limit}`, filter)
+      .post(`https://shoe-shack-backend.vercel.app/api/v1/products/allProducts?page=${page}&limit=${limit}`, filter)
       .then((response) => {
         setProducts(response.data.data);
       })

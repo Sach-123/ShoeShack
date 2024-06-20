@@ -13,7 +13,7 @@ const Header = () => {
 
   const handleLogout = () => {
     axios
-      .post("/api/v1/users/logout")
+      .post("https://shoe-shack-backend.vercel.app/api/v1/users/logout")
       .then(() => {
         setIsLoggedIn(false);
       })

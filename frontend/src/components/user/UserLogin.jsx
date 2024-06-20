@@ -14,7 +14,7 @@ const Login = () => {
 
   const onSubmit = (data) => {
     axios
-      .post("/api/v1/users/login", data)
+      .post("https://shoe-shack-backend.vercel.app/api/v1/users/login", data)
       .then((response) => {
         setUsername(response.data.data.username)
         setMessage(response.data.message);

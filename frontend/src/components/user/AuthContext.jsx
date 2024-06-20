@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const checkLogin = () => {
-    axios.post('/api/v1/users/check-login')
+    axios.post('https://shoe-shack-backend.vercel.app/api/v1/users/check-login')
       .then((response) => {
         if (response.status === 200) {
           setIsLoggedIn(true);
