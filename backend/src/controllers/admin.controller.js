@@ -3,6 +3,13 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import JWT from "jsonwebtoken";
 
+const options = {
+  httpOnly: true,
+  secure: true,
+  sameSite: "None",
+  maxAge: 60 * 60 * 1000
+};
+
 const generateAdminToken = async function ({ username, password }) {
   return JWT.sign(
     {
@@ -36,16 +43,10 @@ const adminLogin = asyncHandler(async (req, res) => {
 
     // const oneHourFromNow = new Date(Date.now() + 60 * 60 * 1000);
 
-    const options = {
-      httpOnly: true,
-      secure: true,
-      sameSite: "None",
-      maxAge: 60 * 60 * 1000
-    };
     return res
       .status(200)
       .cookie("adminAccessToken", adminAccessToken, options)
-      .json(new ApiResponse(200, "admin successfully logged in", {}));
+      .json(new ApiResponse(200, "admin successfully logged in"));
   } catch (error) {
     res.status(error.statusCode).json(error.message);
   }
@@ -54,7 +55,7 @@ const adminLogin = asyncHandler(async (req, res) => {
 const adminLogout = asyncHandler(async (req, res) => {
   return res
     .status(200)
-    .clearCookie("adminAccessToken", { httpOnly: true, secure: true })
+    .clearCookie("adminAccessToken", options)
     .json(new ApiResponse(200, "User logged out successfully"));
 });
 

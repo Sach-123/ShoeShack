@@ -3,6 +3,14 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/users.model.js";
 
+
+const options = {
+  httpOnly: true,
+  secure: true,
+  sameSite: "None",
+  maxAge: 60 * 60 * 1000
+};
+
 const registerUser = asyncHandler(async (req, res) => {
   // take inputs from users
   // check the fields,
@@ -76,12 +84,6 @@ const loginUser = asyncHandler(async (req, res) => {
 
     // const oneHourFromNow = new Date(Date.now() + 60 * 60 * 1000);
 
-    const options = {
-      httpOnly: true,
-      secure: true,
-      sameSite: "None",
-      maxAge: 60 * 60 * 1000,
-    };
     return res
       .status(200)
       .cookie("userAccessToken", userAccessToken, options)
@@ -104,11 +106,6 @@ const logoutUser = asyncHandler(async (req, res) => {
   // clear cookies
 
   const username = req.user.username;
-
-  const options = {
-    httpOnly: true,
-    secure: true,
-  };
 
   return res
     .status(200)
