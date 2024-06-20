@@ -78,6 +78,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
     const options = {
       httpOnly: true,
+      domain: ".shoe-shack-frontend.vercel.app",
       secure: true,
       sameSite: "None",
       expires: oneHourFromNow,
@@ -92,14 +93,12 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 const isLoggedIn = asyncHandler(async (req, res) => {
-  res
-    .status(200)
-    .json(
-      new ApiResponse(200, "User is logged in", {
-        isloggedIn: true,
-        user: req.user,
-      })
-    );
+  res.status(200).json(
+    new ApiResponse(200, "User is logged in", {
+      isloggedIn: true,
+      user: req.user,
+    })
+  );
 });
 
 const logoutUser = asyncHandler(async (req, res) => {
