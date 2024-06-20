@@ -8,8 +8,8 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "https://shoe-shack-backend.vercel.app/api/$1"
+      "src": "/(.*)",
+      "dest": "/src/index.js"
     }
   ]
 }
