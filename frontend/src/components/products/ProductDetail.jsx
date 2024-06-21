@@ -115,7 +115,13 @@ const ProductDetail = () => {
       axios
         .patch(
           "https://shoe-shack-backend.vercel.app/api/v1/users/add-to-cart",
-          { _id: product._id, quantity }
+          { _id: product._id, quantity },
+          {
+            withCredentials: true,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         )
         .then((response) => {
           setIsInCart(true);
@@ -135,7 +141,13 @@ const ProductDetail = () => {
     axios
       .patch(
         "https://shoe-shack-backend.vercel.app/api/v1/users/remove-from-cart",
-        { _id }
+        { _id },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       )
       .then((response) => {
         setIsInCart(false);
@@ -149,7 +161,13 @@ const ProductDetail = () => {
     axios
       .patch(
         "https://shoe-shack-backend.vercel.app/api/v1/users/update-quantity",
-        { _id, quantity }
+        { _id, quantity },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       )
       .then((response) => {
         console.log(response);

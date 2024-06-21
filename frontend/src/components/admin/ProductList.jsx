@@ -17,7 +17,16 @@ const ProductList = () => {
 
   const fetchProducts = (page) => {
     axios
-      .post(`https://shoe-shack-backend.vercel.app/api/v1/products/allProducts?page=${page}&limit=${limit}`, filter)
+      .post(
+        `https://shoe-shack-backend.vercel.app/api/v1/products/allProducts?page=${page}&limit=${limit}`,
+        filter,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         setProducts(response.data.data);
       })
@@ -27,10 +36,19 @@ const ProductList = () => {
   };
 
   const deleteProduct = (id) => {
-    const a = confirm("Are you sure ?")
-    if(a){
+    const a = confirm("Are you sure ?");
+    if (a) {
       axios
-        .post("https://shoe-shack-backend.vercel.app/api/v1/admin/delete-product", { _id: id })
+        .post(
+          "https://shoe-shack-backend.vercel.app/api/v1/admin/delete-product",
+          { _id: id },
+          {
+            withCredentials: true,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
         .then(() => {
           setProducts((prevProducts) => ({
             ...prevProducts,
@@ -40,7 +58,6 @@ const ProductList = () => {
         .catch((error) => {
           console.error("Error deleting product:", error);
         });
-
     }
   };
 

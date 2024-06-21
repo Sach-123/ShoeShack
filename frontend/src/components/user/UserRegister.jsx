@@ -10,14 +10,23 @@ const Register = () => {
 
   const onSubmit = (data) => {
     axios
-      .post("https://shoe-shack-backend.vercel.app/api/v1/users/register", data)
+      .post(
+        "https://shoe-shack-backend.vercel.app/api/v1/users/register",
+        data,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         console.log(response);
         setMessage(response.data.message);
-        setTimeout(() => navigate("/users/login"), 1000); 
+        setTimeout(() => navigate("/users/login"), 1000);
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         setMessage(error.response.data);
       });
     reset();
@@ -25,7 +34,6 @@ const Register = () => {
 
   return (
     <div className=" w-full flex flex-col items-center ">
-      
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col justify-center w-[300px] border-2 p-4 rounded-lg"

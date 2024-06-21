@@ -13,12 +13,16 @@ const AdminPanel = () => {
 
   useEffect(() => {
     axios
-      .post("https://shoe-shack-backend.vercel.app/api/v1/admin/verify-token", {},{
-        withCredentials: true, 
-        headers: {
-          'Content-Type': 'application/json'
+      .post(
+        "https://shoe-shack-backend.vercel.app/api/v1/admin/verify-token",
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      })
+      )
       .then((response) => {
         if (response.status !== 200) {
           throw new Error("unauthorized");
@@ -50,7 +54,16 @@ const AdminPanel = () => {
     }
 
     axios
-      .post("https://shoe-shack-backend.vercel.app/api/v1/admin/add-product", formData)
+      .post(
+        "https://shoe-shack-backend.vercel.app/api/v1/admin/add-product",
+        formData,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         console.log(response);
         setMessage(response.data.message);
