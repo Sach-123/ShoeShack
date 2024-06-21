@@ -24,21 +24,19 @@ const Cart = () => {
 
   const fetchCartItems = () => {
     axios
-      .get(
-        "https://shoe-shack-backend.vercel.app/api/v1/users/cart",
-        {},
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      .get("https://shoe-shack-backend.vercel.app/api/v1/users/cart", {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((response) => {
         const cartData = response.data.data.cartItems;
         setCartItems(cartData);
       })
-      .catch((error) => {})
+      .catch((error) => {
+        console.log(error);
+      })
       .finally(() => {
         setLoading(false);
       });
