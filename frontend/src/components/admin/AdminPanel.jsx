@@ -60,14 +60,13 @@ const AdminPanel = () => {
         {
           withCredentials: true,
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         }
       )
       .then((response) => {
         console.log(response);
         setMessage(response.data.message);
-        reset();
       })
       .catch((error) => {
         setMessage(error.response.data);
