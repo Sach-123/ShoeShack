@@ -24,12 +24,16 @@ const Cart = () => {
 
   const fetchCartItems = () => {
     axios
-      .get("https://shoe-shack-backend.vercel.app/api/v1/users/cart",{
-        withCredentials: true, 
-        headers: {
-          'Content-Type': 'application/json'
+      .get(
+        "https://shoe-shack-backend.vercel.app/api/v1/users/cart",
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      })
+      )
       .then((response) => {
         const cartData = response.data.data.cartItems;
         setCartItems(cartData);
@@ -49,12 +53,16 @@ const Cart = () => {
 
   const handleRemoveFromCart = (id) => {
     axios
-      .patch("https://shoe-shack-backend.vercel.app/api/v1/users/remove-from-cart", { _id: id },{
-        withCredentials: true, 
-        headers: {
-          'Content-Type': 'application/json'
+      .patch(
+        "https://shoe-shack-backend.vercel.app/api/v1/users/remove-from-cart",
+        { _id: id },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      })
+      )
       .then((response) => {
         setCartItems(cartItems.filter((item) => item.product._id !== id));
       })
@@ -65,12 +73,16 @@ const Cart = () => {
 
   const handleCheckout = () => {
     axios
-      .post("https://shoe-shack-backend.vercel.app/api/v1/users/confirm-order",{},{
-        withCredentials: true, 
-        headers: {
-          'Content-Type': 'application/json'
+      .post(
+        "https://shoe-shack-backend.vercel.app/api/v1/users/confirm-order",
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      })
+      )
       .then(() => {
         setCartItems([]);
         alert("Order placed successfully");

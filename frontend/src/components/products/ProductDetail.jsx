@@ -29,7 +29,13 @@ const ProductDetail = () => {
     axios
       .post(
         "https://shoe-shack-backend.vercel.app/api/v1/products/product/get-review",
-        { _id }
+        { _id },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       )
       .then((response) => {
         setReviews(response.data);
