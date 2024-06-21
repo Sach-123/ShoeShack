@@ -14,7 +14,7 @@
 7. User Reviews and Ratings
 8. Admin Panel
 
-## Key Packages Used
+## Key Packages and Tools Used
 - **Frontend**
   - React
   - React Router
